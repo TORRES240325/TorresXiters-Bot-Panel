@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Gestión de Socios{% endblock %}
+
+{% block content %}
+    <h1>Gestión de Socios (Usuarios)</h1>
+
+    <a href="{{ url_for('create_user') }}" class="button-red" style="float: right;">+ Registrar Nuevo Socio</a>
+    <div style="clear: both; margin-bottom: 20px;"></div>
+
+    <h2>Lista de Socios Registrados</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID Firebase</th>
+                <th>USERNAME</th>
+                <th>ID TELEGRAM</th>
+                <th>SALDO</th>
+                <th>LOGIN KEY</th>
+                <th>ADMIN</th>
+                <th>ACCIONES</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if usuarios %}
+                {% for usuario in usuarios %}
+                    <tr>
+                        <td>{{ usuario.id }}</td>
+                        <td>{{ usuario.username }}</td>
+                        <td>{{ usuario.telegram_id if usuario.telegram_id else 'N/A' }}</td>
+                        <td style="font-weight: bold; color: #66FF66;">${{ "%.2f"|format(usuario.saldo) }}</td>
+                        <td>{{ usuario.login_key }}</td>
+                        <td>{{ 'Sí' if usuario.es_admin else 'No' }}</td>
+                        <td><a href="{{ url_for('adjust_saldo', user_id=usuario.id) }}" class="button-red" style="background-color: #007BFF; padding: 8px 15px;">Ajustar Saldo</a></td> 
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr><td colspan="7" style="text-align: center; color:#FFCC00; padding: 20px; font-weight: bold;">No hay socios registrados en la base de datos (solo el administrador).</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

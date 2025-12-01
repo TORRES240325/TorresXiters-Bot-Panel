@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Socio{% endblock %}
+
+{% block content %}
+    <h1>Crear Nuevo Socio</h1>
+    
+    <a href="{{ url_for('manage_users') }}" style="color:#FF004C; text-decoration: none; margin-bottom: 15px; display: inline-block;">← Volver a Usuarios</a>
+
+    <form method="POST" style="max-width: 500px;">
+        <label for="username">Username (Usado para Login):</label>
+        <input type="text" id="username" name="username" required>
+        
+        <label for="login_key">Login Key (Clave para Login en el Bot):</label>
+        <input type="password" id="login_key" name="login_key" required>
+
+        <label for="saldo">Saldo Inicial ($):</label>
+        <input type="number" id="saldo" name="saldo" step="0.01" value="0.00">
+        
+        <label style="margin-top: 15px;">
+            <input type="checkbox" name="es_admin" style="width: auto; margin-right: 10px;"> Es Administrador
+        </label>
+
+        <button type="submit" class="button-red" style="margin-top: 20px;">Crear Usuario</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Inventario - {{ producto.nombre }}{% endblock %}
+
+{% block content %}
+    <h1>Inventario de Keys: {{ producto.nombre }}</h1>
+    
+    <a href="{{ url_for('manage_products') }}" class="back-link">← Volver a Productos</a>
+
+    <h2>Agregar Nuevas Licencias</h2>
+    <form method="POST" style="max-width: 650px; margin-bottom: 40px;">
+        <p style="color:#aaa; margin-bottom: 15px; font-size: 0.9em; font-weight: 500;">Pega las licencias, una por línea. Las claves se añadirán con estado "available".</p>
+        <textarea name="licencias" rows="7" required style="height: 180px;"></textarea>
+
+        <button type="submit" class="button-red" style="margin-top: 20px; background-color: #00A000;">Añadir Keys al Inventario</button>
+    </form>
+
+    <h2 style="color: #66FF66;">Keys Disponibles ({{ available_keys|length }})</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Licencia</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in available_keys %}
+                <tr>
+                    <td>{{ key.licencia }}</td>
+                    <td style="color: #66FF66; font-weight: bold;">{{ key.estado | upper }}</td>
+                </tr>
+            {% endfor %}
+            {% if not available_keys %}
+                <tr><td colspan="2" style="text-align: center; color:#FFCC00; padding: 15px; font-weight: bold;">No hay keys disponibles. Agrega nuevas.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <h2 style="margin-top: 40px; color: #FF6666;">Keys Usadas ({{ used_keys|length }})</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Licencia</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for key in used_keys %}
+                <tr>
+                    <td>{{ key.licencia }}</td>
+                    <td style="color: #FF6666; font-weight: bold;">{{ key.estado | upper }}</td>
+                </tr>
+            {% endfor %}
+            {% if not used_keys %}
+                <tr><td colspan="2" style="text-align: center; color:#888; padding: 15px;">Aún no se ha vendido ninguna key.</td></tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endblock %}

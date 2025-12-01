@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Torres Xiters | Panel de Administrador</title>
+    <style>
+        /* [Omitting full CSS for brevity, but this should contain ALL the CSS] */
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #121212; color: #E0E0E0; margin: 0; padding: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        .login-box { 
+            background-color: #1F1F1F; padding: 40px; border-radius: 15px; max-width: 400px; width: 90%; 
+            border: 1px solid #333; box-shadow: 0 8px 30px rgba(0, 0, 0, 0.7); text-align: center;
+        }
+        h1 { color: #FF004C; font-size: 2.2em; text-transform: uppercase; margin-bottom: 30px; border-bottom: 3px solid #FF004C; padding-bottom: 10px; }
+        label { display: block; margin-top: 15px; margin-bottom: 8px; font-weight: bold; color: #E0E0E0; font-size: 1em; text-align: left; }
+        input[type="text"], input[type="password"] { 
+            width: 100%; padding: 14px; margin-bottom: 20px; background: #2A2A2A; border: 1px solid #444; color: white; border-radius: 8px; box-sizing: border-box; font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        input:focus { border-color: #FF004C; box-shadow: 0 0 5px rgba(255, 0, 76, 0.5); outline: none; }
+        .button-red { 
+            background-color: #FF004C; color: white; padding: 12px 18px; text-decoration: none; border-radius: 6px; font-weight: bold; border: none; cursor: pointer; transition: background-color 0.3s, transform 0.1s; 
+            display: block; width: 100%; margin-top: 25px; font-size: 1.1em; text-transform: uppercase;
+        }
+        .button-red:hover { background-color: #CC003A; transform: translateY(-2px); box-shadow: 0 4px 10px rgba(255, 0, 76, 0.4); }
+        .alert { padding: 15px; margin-bottom: 20px; border-radius: 8px; font-size: 1em; text-align: left; }
+        .alert-danger { background-color: #440000; color: #FF6666; border: 1px solid #FF0000; }
+    </style>
+</head>
+<body>
+
+<div class="login-box">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-danger">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+    
+    <h1>ADMIN LOGIN</h1>
+
+    <form method="POST">
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required placeholder="admin">
+        
+        <label for="login_key">Contraseña:</label>
+        <input type="password" id="login_key" name="login_key" required placeholder="admin123">
+
+        <button type="submit" class="button-red">Iniciar Sesión</button>
+    </form>
+</div>
+
+</body>
+</html>

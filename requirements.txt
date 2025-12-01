@@ -1,0 +1,8 @@
+# requirements.txt
+flask
+gunicorn
+sqlalchemy==2.0.44
+flask-sqlalchemy
+python-dotenv
+psycopg2-binary
+python-telegram-bot

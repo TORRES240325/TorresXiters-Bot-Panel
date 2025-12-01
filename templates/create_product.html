@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Producto{% endblock %}
+
+{% block content %}
+    <h1>Crear Nuevo Producto</h1>
+    
+    <a href="{{ url_for('manage_products') }}" style="color:#FF004C; text-decoration: none; margin-bottom: 15px; display: inline-block;">← Volver a Productos</a>
+
+    <form method="POST" style="max-width: 600px;">
+        <label for="nombre">Nombre del Producto:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="categoria">Categoría:</label>
+        <input type="text" id="categoria" name="categoria" required>
+
+        <label for="precio">Precio ($):</label>
+        <input type="number" id="precio" name="precio" step="0.01" required value="0.00">
+        
+        <label for="descripcion">Descripción (o Nota):</label>
+        <textarea id="descripcion" name="descripcion" rows="3"></textarea>
+
+        <button type="submit" class="button-red" style="margin-top: 20px;">Guardar Producto</button>
+    </form>
+{% endblock %}
