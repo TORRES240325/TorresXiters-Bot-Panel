@@ -1,0 +1,5 @@
+# Archivos de entorno y clave
+.env
+socios_bot.db
+__pycache__/
+serviceAccountKey.json
